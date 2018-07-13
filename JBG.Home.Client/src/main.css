@@ -1,0 +1,60 @@
+:root {
+    --background-primary-color: #f3f3f3;
+    --background-alt-color: #2B3A42;
+    --default-font-family: "Helvetica, Arial, sans-serif";
+}
+
+body {
+    font-family: var(--default-font-family);
+    background: var(--background-primary-color);
+}
+
+.application {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: auto 2em;
+    grid-column-gap: 10px;
+    width: 100vw;
+    height: 100vh;
+}
+
+.application .sidebar {
+    padding-top: 1rem;
+    grid-column: span 1;
+    background: var(--background-alt-color);
+}
+
+.application .main {
+    padding-top: 1rem;
+    grid-column: span 23;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-column-gap: 10px;
+}
+
+.application .main .tile {
+    background-color: white;
+    grid-auto-columns: 1;
+    text-align: center;
+    align-items: center;
+    padding: 2%;
+}
+
+.application .footer {
+    grid-column: span 24;
+    line-height: 2.2em;
+    padding: 0 10px;
+    background: black;
+    color: var(--background-primary-color);
+    font-size: 0.8em;
+}
+
+.application .footer a, .application .footer a:active {
+    color: #5dafe6;
+    text-decoration: none;
+}
+
+.application .footer a:hover {
+    text-decoration: underline;
+}
