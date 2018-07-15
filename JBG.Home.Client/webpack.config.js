@@ -1,5 +1,6 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpackMajorVersion = require('webpack/package.json').version.split('.')[0];
 
 module.exports = {
@@ -8,7 +9,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist/webpack-' + webpackMajorVersion),
     publicPath: '',
-    filename: 'bundle.js'
+    filename: 'bundle.[hash].js'
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -18,24 +19,42 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
+        use: [ { loader: MiniCssExtractPlugin.loader }, 'css-loader' ]
       },
       {
-        test: /index\.mustache$/,
-        loader: 'mustache-loader',
-        options: {
-            tiny: true,
-            render: {
-                title: 'hello world',
-            },
-        },
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [{
+            loader: 'file-loader',
+            options: {
+                name: '[name].[ext]',
+                outputPath: 'fonts/'
+            }
+        }]
+      },
+      {
+        test: /\.svg$/,
+        use: [{
+            loader: 'file-loader',
+            options: {
+                name: '[name].[ext]',
+                outputPath: 'icons/'
+            }
+        }]
+      },
+      { 
+        test: /\.handlebars$/, 
+        loader: "handlebars-loader"
       }
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-        template: 'src/index.mustache',
-        inject: 'body',
+    new MiniCssExtractPlugin({
+      filename: "[name].[hash].css",
+      chunkFilename: "[id].[hash].css"
     }),
+    new HtmlWebpackPlugin({
+        template: 'src/index.handlebars',
+        inject: 'body',
+    })
   ]
 };

@@ -1,27 +1,58 @@
 :root {
+    --font-primary-color: #2c304d;
+    --font-secondary-color: #5D7D8E;
     --background-primary-color: #f3f3f3;
+    --background-secondary-color: white;
     --background-alt-color: #2B3A42;
-    --default-font-family: "Helvetica, Arial, sans-serif";
+    --default-font-family: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
+    --header-font-family: "IndustryInc-Base", Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
 }
 
 body {
     font-family: var(--default-font-family);
+    color: var(--font-primary-color);
     background: var(--background-primary-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--header-font-family);
+}
+
+h1 {
+	font-size: 4rem;
+}
+
+h2 {
+	font-size: 2rem;
 }
 
 .application {
     display: grid;
     grid-template-columns: repeat(24, 1fr);
-    grid-template-rows: auto 2em;
+    grid-template-rows: 4rem auto 2rem;
     grid-column-gap: 10px;
     width: 100vw;
     height: 100vh;
 }
 
+.application .hero {
+    font-size: 4rem;
+}
+
+.application .subtitle {
+    font-size: 0.8rem;
+    color: var(--font-secondary-color);
+}
+
 .application .sidebar {
     padding-top: 1rem;
-    grid-column: span 1;
+    grid-row: span 3;
     background: var(--background-alt-color);
+}
+
+.application .pageheader {
+    grid-column: span 23;
+    line-height: 4rem;
 }
 
 .application .main {
@@ -39,15 +70,19 @@ body {
     text-align: center;
     align-items: center;
     padding: 2%;
+    box-shadow: 0 1px 15px 1px rgba(52,40,104,.08)
+}
+
+.tile .tile-content {
+    margin: auto;
 }
 
 .application .footer {
-    grid-column: span 24;
-    line-height: 2.2em;
+    grid-column: span 23;
+    line-height: 2.4em;
     padding: 0 10px;
-    background: black;
-    color: var(--background-primary-color);
     font-size: 0.8em;
+    text-align: center;
 }
 
 .application .footer a, .application .footer a:active {
