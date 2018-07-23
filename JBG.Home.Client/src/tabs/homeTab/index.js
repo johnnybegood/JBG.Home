@@ -1,3 +1,10 @@
 import todayTile from "./tiles/todayTile/index.js";
 
-const appHolder = document.getElementById("container");
+export default function render() {
+    var tiles = [ todayTile ];
+    var content = tiles.reduce((prev, tile) => {
+        return prev + tile();
+    }, ''); 
+
+    return content;
+}

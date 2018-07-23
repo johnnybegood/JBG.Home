@@ -1,6 +1,7 @@
 // Import tabs
-import "./tabs/homeTab";
+import homeTab from "./tabs/homeTab";
 
 export function onLoad() {
-    
+    var container = document.getElementById('container');
+    container.innerHTML = homeTab();
 }

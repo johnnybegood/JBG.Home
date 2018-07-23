@@ -5,5 +5,4 @@ import "./main.css";
 
 // Startup
 import {onLoad} from "./startup.js";
-
 window.addEventListener("load", onLoad);
