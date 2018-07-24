@@ -33,13 +33,15 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: [{
+        use: [
+          {
             loader: 'file-loader',
             options: {
-                name: '[name].[ext]',
+                name: '[name].[hash].[ext]',
                 outputPath: 'icons/'
             }
-        }]
+          }
+        ]
       },
       { 
         test: /\.handlebars$/, 

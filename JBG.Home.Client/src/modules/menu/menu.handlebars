@@ -1,0 +1,8 @@
+<nav class="nav">
+    {{#each menuItems}}
+    <a href="#{{route}}">
+        <img src="{{icon}}" class="nav-icon nav-icon--no-hover" alt="{{name}}"/>
+        <img src="{{iconHover}}" class="nav-icon nav-icon--hover" alt="{{name}}"/>
+    </a>
+    {{/each}}
+</nav>

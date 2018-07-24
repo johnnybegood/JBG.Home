@@ -1,7 +1,10 @@
-// Import tabs
-import homeTab from "./tabs/homeTab";
+import homeTab from "./modules/homeTab";
+import menu from "./modules/menu";
 
 export function onLoad() {
-    var container = document.getElementById('container');
+    let container = document.getElementById('container');
     container.appendChild(homeTab());
+
+    let sidebar = document.getElementById('sidebar');
+    sidebar.innerHTML = menu();
 }

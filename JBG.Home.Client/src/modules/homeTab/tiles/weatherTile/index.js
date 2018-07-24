@@ -1,9 +1,9 @@
-import './icons';
+import sun from './icons/sun.svg';
 import template from './weather.handlebars';
 
 export default function render() {
     return template({
-        icon: 'Sun',
+        icon: sun,
         temperature: 20,
         max: 30,
         min: 18,

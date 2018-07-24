@@ -50,7 +50,6 @@ h3 {
 }
 
 .application .sidebar {
-    padding-top: 1rem;
     grid-row: span 3;
     background: var(--background-alt-color);
 }

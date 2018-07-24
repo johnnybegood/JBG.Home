@@ -1,0 +1,21 @@
+.nav .nav-icon {
+    width: 2rem;
+    padding: 1rem;
+}
+
+.nav a:hover, .nav a:hover .nav-icon {
+    background: var(--background-secondary-color);
+    color: var(--font-primary-color);
+}
+
+.nav a:hover .nav-icon--no-hover {
+    display: none;
+}
+
+.nav .nav-icon--hover {
+    display: none;
+}
+
+.nav a:hover .nav-icon--hover {
+    display: block;
+}
