@@ -1,4 +1,19 @@
-<div class="tile">
-    <img src="icons/Cloud-Drizzle-Sun.svg" class="icon" />
-    <h2>26°C</h2>
+<div class="tile tile--2x">
+    <img src="icons/{{icon}}.svg" class="icon" />
+    <h2>{{temperature}} °C</h2>
+    <div class="tile-3col">
+        <div class="tile-col">
+            <div class="subtitle">Min</div>
+            <h3>{{min}} °C</h3>
+        </div>
+        <div class="tile-col">
+            <div class="subtitle">Max</div>
+            <h3>{{max}} °C</h3>
+        </div>
+        <div class="tile-col">
+            <div class="subtitle">Rain</div>
+            <h3>{{rain.chance}}</h3>
+            <div class="subtitle">{{rain.time}}</div>
+        </div>
+    </div>
 </div>

@@ -26,6 +26,10 @@ h2 {
 	font-size: 2rem;
 }
 
+h3 {
+	font-size: 1.8rem;
+}
+
 .application {
     display: grid;
     grid-template-columns: repeat(24, 1fr);
@@ -41,6 +45,7 @@ h2 {
 
 .application .subtitle {
     font-size: 0.8rem;
+    margin: 0.4rem 0;
     color: var(--font-secondary-color);
 }
 
@@ -58,24 +63,8 @@ h2 {
 .application .main {
     padding-top: 1rem;
     grid-column: span 23;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    grid-column-gap: 10px;
 }
 
-.application .main .tile {
-    background-color: white;
-    grid-auto-columns: 1;
-    text-align: center;
-    align-items: center;
-    padding: 2%;
-    box-shadow: 0 1px 15px 1px rgba(52,40,104,.08)
-}
-
-.tile .tile-content {
-    margin: auto;
-}
 
 .application .footer {
     grid-column: span 23;
