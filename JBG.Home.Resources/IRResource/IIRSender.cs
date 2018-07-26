@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace JBG.Home.Server.Resources
+namespace JBG.Home.Resources.IRResource
 {
     public interface IIRSender
     {

@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using JBG.Home.Server.Resources;
-using Microsoft.Azure.KeyVault.Models;
+﻿using System.Threading.Tasks;
+using JBG.Home.DeviceManagement.Contracts;
+using JBG.Home.Resources.IRResource;
 
-namespace JBG.Home.Server.Devices
+namespace JBG.Home.Server.DeviceManagement
 {
     public class SonyAmpDevice : IDevice
     {

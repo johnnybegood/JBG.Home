@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using JBG.Home.DeviceManagement.Contracts;
 
-namespace JBG.Home.Server.Devices
+namespace JBG.Home.Server.DeviceManagement
 {
     public class DeviceManager : IDeviceManager
     {

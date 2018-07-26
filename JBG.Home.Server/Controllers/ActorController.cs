@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using JBG.Home.Server.Devices;
-using JBG.Home.Server.Resources;
+using JBG.Home.DeviceManagement;
+using JBG.Home.DeviceManagement.Contracts;
+using JBG.Home.Resources.IRResource;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JBG.Home.Server.Controllers
@@ -32,7 +33,6 @@ namespace JBG.Home.Server.Controllers
             return DeviceActions.For(deviceType);
         }
 
-        // PUT api/values/5
         [HttpPost("trigger/{actionId}")]
         public async Task TriggerAction(string actionId)
         {

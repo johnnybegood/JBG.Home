@@ -1,12 +1,11 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Net.Http;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JBG.Home.Server.Resources
+namespace JBG.Home.Resources.IRResource
 {
     public class IRSender : IDisposable, IIRSender
     {

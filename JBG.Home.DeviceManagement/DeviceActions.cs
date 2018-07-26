@@ -1,20 +1,26 @@
 ﻿using System;
 using System.Linq;
+using JBG.Home.DeviceManagement.Contracts;
 
-namespace JBG.Home.Server.Devices
+namespace JBG.Home.DeviceManagement
 {
     public static class DeviceActions
     {
         /// <summary>
         /// Get all actions for the given device type
         /// </summary>
-        /// <typeparam name="TDevice"></typeparam>
+        /// <typeparam name="TDevice">Type of the device</typeparam>
         /// <returns></returns>
         public static string[] For<TDevice>() where TDevice : IDevice
         {
             return For(typeof(TDevice));
         }
 
+        /// <summary>
+        /// Get all actions for the given device type
+        /// </summary>
+        /// <param name="deviceType">Type of the device</param>
+        /// <returns></returns>
         public static string[] For(Type deviceType)
         {
             if (!deviceType.IsAssignableFrom(typeof(IDevice)))
@@ -29,9 +35,5 @@ namespace JBG.Home.Server.Devices
 
             return actions;
         }
-    }
-
-    public class DeviceActionAttribute : Attribute
-    {
     }
 }
