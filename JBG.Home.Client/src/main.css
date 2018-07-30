@@ -81,3 +81,15 @@ h3 {
 .application .footer a:hover {
     text-decoration: underline;
 }
+
+.application .icon {
+    width: 50px;
+}
+
+.application .icon.icon--large {
+    width: 100px;
+}
+
+.application .icon.icon--small {
+    width: 25px;
+}

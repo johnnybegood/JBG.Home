@@ -1,11 +1,15 @@
-﻿using Flurl.Http.Configuration;
+﻿using System.Collections.Generic;
+using System.IO;
+using Flurl.Http.Configuration;
 using JBG.Home.Resources.WeatherResource;
 using JBG.Home.Server.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace JBG.Home.Server
@@ -45,11 +49,20 @@ namespace JBG.Home.Server
         {
             if (env.IsDevelopment())
             {
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                var serverPathPosition = basePath.IndexOf("/JBG.Home.Server", System.StringComparison.Ordinal);
+                var webPackConfig = new WebpackDevMiddlewareOptions
+                {
+                    HotModuleReplacement = true,
+                    ProjectPath = Path.Combine(basePath.Substring(0, serverPathPosition), "JBG.Home.Client"),
+                };
+
                 app.UseDeveloperExceptionPage();
+                app.UseWebpackDevMiddleware(webPackConfig);
             }
             else {
-                app.UseHsts()
-                   .UseHttpsRedirection();
+                app.UseHsts();
+                app.UseHttpsRedirection();
             }
 
             app.UseMvc();

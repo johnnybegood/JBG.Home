@@ -13,5 +13,7 @@ namespace JBG.Home.Resources.WeatherResource
         Snow = 16,
         Fog = 24,
         Clouds = 36,
+
+        Bad = (2 + 8 + 16 + 24 + 36)
     }
 }

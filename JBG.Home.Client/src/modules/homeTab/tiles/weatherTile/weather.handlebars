@@ -1,6 +1,7 @@
 <div class="tile tile--2x">
-    <img src="{{icon}}" class="icon" />
+    <img src="{{icon}}" class="icon icon--large" />
     <h2>{{temperature}} °C</h2>
+    <div class="subtitle">{{description}}</div>
     <div class="tile-3col">
         <div class="tile-col">
             <div class="subtitle">Min</div>
@@ -11,9 +12,8 @@
             <h3>{{max}} °C</h3>
         </div>
         <div class="tile-col">
-            <div class="subtitle">Rain</div>
-            <h3>{{rain.chance}}</h3>
-            <div class="subtitle">{{rain.time}}</div>
+            <div class="subtitle">Voorspelling</div>
+            <img src="{{alert}}" class="icon icon--small" />
         </div>
     </div>
 </div>

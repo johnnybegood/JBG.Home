@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Flurl.Http;
@@ -27,14 +28,24 @@ namespace JBG.Home.Resources.WeatherResource
         {
             _logger = logger;
             _client = clientFactory.Get(configuration["Weather:Url"])
-                                   .Configure(s => s.Defaults.BeforeCall = SetAppId(configuration["Weather:AppId"]));
+                                   .Configure(s => s.Defaults.BeforeCall = SetDefaultQuery(configuration["Weather:AppId"], configuration["Weather:Language"]));
         }
 
-        private Action<HttpCall> SetAppId(string appId)
+        /// <summary>
+        /// Set default query string parameters on each request
+        /// </summary>
+        /// <returns><see cref="Action{T}"/> to modify the <see cref="HttpCall"/>.</returns>
+        /// <param name="appId">App identifier.</param>
+        /// <param name="language">Language.</param>
+        private Action<HttpCall> SetDefaultQuery(string appId, string language)
         {
             return call =>
             {
                 call.FlurlRequest.SetQueryParam("APPID", appId);
+
+                if(!string.IsNullOrEmpty(language)) {
+                    call.FlurlRequest.SetQueryParam("lang", language);
+                }
             };
         }
 
@@ -51,51 +62,25 @@ namespace JBG.Home.Resources.WeatherResource
             return new CurrentWeatherSummary
             {
                 CurrentTemperature = response.Condiditions.Temp,
-                MaxTemperature = response.Condiditions.TempMax,
-                MinTemperature = response.Condiditions.TempMin,
-                DescriptionCurrentCondition = string.Join(", ", response.Details.Select(d => d.Description)),
-                CurrentCondition = MapCurrentCondition(response.Details)
+                Weather = response.MapToWeatherSummary(),
             };
         }
 
-        /// <summary>
-        /// Maps Openweathermap weather codes to <see cref="WeatherCondition"/>.
-        /// See <a href="https://openweathermap.org/weather-conditions">openweathermap.org/weather-conditions</a> for more information on the weather codes.
-        /// </summary>
-        /// <returns>The current condition.</returns>
-        /// <param name="details">Openweathermap weather details</param>
-        private WeatherCondition MapCurrentCondition(WeatherDetails[] details)
+        /// <inheritdoc />
+        public async Task<IEnumerable<WeatherSummary>> GetForecastAsync(int cityId)
         {
-            var condition = WeatherCondition.Clear;
+            var response = await _client.Request("forecast")
+                                        .SetQueryParams(new
+                                        {
+                                            id = cityId,
+                                            units = "metric",
+                                        })
+                                        .GetJsonAsync<WeatherForecastList>();
 
-            foreach (var item in details)
-            {
-                switch (item.Id)
-                {
-                    case var id when id >= 200 && id < 300:
-                        condition &= WeatherCondition.Thunderstorm;
-                        break;
-                    case var id when id >= 300 && id < 400:
-                        condition &= WeatherCondition.Drizzle;
-                        break;
-                    case var id when id >= 500 && id < 600:
-                        condition &= WeatherCondition.Rain;
-                        break;
-                    case var id when id >= 600 && id < 700:
-                        condition &= WeatherCondition.Snow;
-                        break;
-                    case var id when id >= 700 && id < 800:
-                        condition &= WeatherCondition.Fog;
-                        break;
-                    case var id when id > 801 && id < 900:
-                        condition &= WeatherCondition.Clouds;
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            return condition;
+            return response
+                .Items
+                .Select(f => f.MapToWeatherSummary())
+                .OrderBy(s => s.ForecastDateTime);
         }
     }
 }

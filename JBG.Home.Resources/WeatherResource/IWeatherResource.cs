@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace JBG.Home.Resources.WeatherResource
 {
@@ -13,5 +14,12 @@ namespace JBG.Home.Resources.WeatherResource
         /// <returns>The current weather for the requested city async.</returns>
         /// <param name="cityId">City identifier. See <a href="https://openweathermap.org/api">OpenWeather API</a> mapping of cities and ids</param>
         Task<CurrentWeatherSummary> GetCurrentWeatherAsync(int cityId);
+
+        /// <summary>
+        /// Gets the weather forecast async. Uses <a href="https://openweathermap.org/forecast5">/forecast5</a> of OpenWeather API
+        /// </summary>
+        /// <returns>The current weather for the requested city async.</returns>
+        /// <param name="cityId">City identifier. See <a href="https://openweathermap.org/api">OpenWeather API</a> mapping of cities and ids</param>
+        Task<IEnumerable<WeatherSummary>> GetForecastAsync(int cityId);
     }
 }

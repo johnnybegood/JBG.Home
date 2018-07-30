@@ -1,19 +1,22 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpackMajorVersion = require('webpack/package.json').version.split('.')[0];
+const webpack = require('webpack');
 
 module.exports = {
   context: __dirname,
-  entry: './src/index.js',
+  entry: {
+    main: './src/index.js'
+  },
   output: {
-    path: path.join(__dirname, 'dist/webpack-' + webpackMajorVersion),
-    publicPath: '',
+    path: path.join(__dirname, '../JBG.Home.Server/wwwroot'),
+    publicPath: '/',
     filename: 'bundle.[hash].js'
   },
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
+    hot: true
   },
   module: {
     rules: [
@@ -57,6 +60,7 @@ module.exports = {
     new HtmlWebpackPlugin({
         template: 'src/index.html',
         inject: 'body',
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ]
 };
